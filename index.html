@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BUYPHONE</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4Q6Gf2aSP4eDXB8Miphtr37CMZZQ5oXLH2yaXMJ2w8e2ZtHTl7GptT4jmndRuHDT" crossorigin="anonymous">
+</head>
+
+<style>
+.input-group {
+    width: 250px;
+}
+
+.cart {
+    margin-left: 15px;
+}
+.badge-danger {
+    font-size: 14px;
+    padding: 5px;
+}
+
+</style>
+
+<body>
+    <header class="bg-dark text-white p-3">
+        <div class="container d-flex justify-content-between align-items-center">
+            <div class="logo h1">BUYPHONE</div>
+            <nav>
+                <ul class="nav">
+                    <li class="nav-item"><a class="nav-link text-white" href="./source/pages/landing.html" target="frame">Trang chủ</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="./source/pages/product.html" target="frame">Sản phẩm</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Tin công nghệ</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Dịch vụ</a></li>
+                    <li class="nav-item"><a class="nav-link text-white" href="#">Liên hệ</a></li>
+                </ul>
+            </nav>
+
+
+            <!-- Giỏ hàng -->
+            <div class="cart">
+                <a href="#" class="btn btn-outline-light">
+                    🛒 Giỏ hàng
+                    <span class="badge badge-danger">0</span> <!-- Hiển thị số lượng sản phẩm -->
+                </a>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="container-fuild"> 
+
+        <iframe id="frame" name="frame" src="./source/pages/landing.html" frameborder="0" style="min-height: 100vh; width: 100%;"></iframe>
+
+    </main>
+
+    <footer class="bg-dark text-white text-center py-3">
+    
+        <div class="container">
+        
+            <p>© 2025 BUYPHONE - All rights reserved.</p>
+        
+            <ul class="nav justify-content-center">
+            
+                <li class="nav-item"><a class="nav-link text-white" href="#">Về chúng tôi</a></li>
+            
+                <li class="nav-item"><a class="nav-link text-white" href="#">Chính sách bảo mật</a></li>
+            
+                <li class="nav-item"><a class="nav-link text-white" href="#">Điều khoản sử dụng</a></li>
+            
+                <li class="nav-item"><a class="nav-link text-white" href="#">Liên hệ</a></li>
+        
+            </ul>
+    
+        </div>
+
+    </footer>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" integrity="sha384-j1CDi7MgGQ12Z7Qab0qlWQ/Qqz24Gc6BM0thvEMVjHnfYGF0rmFCozFSxQBxwHKO" crossorigin="anonymous"></script>
+</body>
+</html>
