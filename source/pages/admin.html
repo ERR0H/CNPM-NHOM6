@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Quản lý Shop Điện Thoại & Phụ Kiện</title>
+    
+    <style>
+     
+    * {
+        margin: 0; 
+        padding: 0; 
+        box-sizing: 
+        border-box;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body {
+        background: #f0f2f5;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 30px;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 1100px;
+        background: #ffffff;
+        border-radius: 16px;
+        padding: 50px 30px 40px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        position: relative;
+    }
+    
+    h1 {
+        text-align: center;
+        font-size: 2.4rem;
+        color: #2d3e50;
+        margin-bottom: 40px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+    }
+    .button-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+        gap: 25px;
+    }
+    .nav-button {
+        background-color: #f8f9fa;
+        border: 1px solid #e0e0e0;
+        border-radius: 15px;
+        padding: 25px 20px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        text-align: center;
+    }
+    .nav-button:hover {
+        transform: translateY(-4px);
+        background-color: #edf1f7;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+    }
+    .icon {
+        font-size: 2.5rem;
+        color: #4a6baf;
+        margin-bottom: 15px;
+    }
+    .button-title {
+        font-size: 1.1rem;
+        font-weight: bold;
+        margin-bottom: 8px;
+        color: #333;
+    }
+    .button-desc {
+        font-size: 0.9rem;
+        color: #666;
+    }
+    .logout-btn {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        background: linear-gradient(135deg, #ff4e50, #f9d423);
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 30px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: bold;
+        font-size: 0.95rem;
+        box-shadow: 0 5px 15px rgba(249, 212, 35, 0.4);
+        transition: all 0.3s ease;
+    }
+
+    .logout-btn i {
+        font-size: 1.1rem;
+    }
+
+    .logout-btn:hover {
+        transform: translateY(-3px);
+        background: linear-gradient(135deg, #f85032, #e73827);
+        box-shadow: 0 10px 25px rgba(255, 85, 85, 0.5);
+    }
+
+    .user-info {
+        position: absolute;
+        top: 20px; left: 20px;
+        font-weight: 600;
+        color: #4a6baf;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+    @media (max-width: 768px) {
+        .button-container {
+            grid-template-columns: 1fr;
+        }
+        h1 {
+            font-size: 1.8rem;
+        }
+        .logout-btn, .user-info {
+            font-size: 0.9rem;
+            padding: 8px 14px;
+        }
+    }
+
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+</head>
+<body>
+    <div class="container">
+        <!-- Thông tin người dùng -->
+        <div class="user-info">
+            <i class="fas fa-user-circle"></i>
+            <?php echo htmlspecialchars($_SESSION['username'] ?? 'Quản trị viên'); ?>
+        </div>
+        
+        
+        <!-- Nút đăng xuất -->
+        <button class="logout-btn" onclick="location.href='?logout=true'">
+            <i class="fas fa-sign-out-alt"></i> Đăng xuất
+        </button>
+        <script>
+       function confirmLogout() {
+           if (confirm("Bạn có chắc chắn muốn đăng xuất không?")) {
+         window.location.href = '?logout=true';
+        }
+       }
+        </script> 
+        
+        <h1>HỆ THỐNG QUẢN LÝ SHOP ĐIỆN THOẠI & PHỤ KIỆN</h1>
+        
+        <div class="button-container">
+            <button class="nav-button" onclick="location.href='php/events/DienThoai/dienthoai_list.php'">
+                <div class="icon"><i class="fas fa-mobile-alt"></i></div>
+                <div class="button-title">Quản lý Điện thoại</div>
+                <div class="button-desc">Thêm, sửa, xóa sản phẩm điện thoại</div>
+            </button>
+
+            <button class="nav-button" onclick="location.href='sanpham/phu_kien.php'">
+                <div class="icon"><i class="fas fa-headphones-alt"></i></div>
+                <div class="button-title">Quản lý Phụ kiện</div>
+                <div class="button-desc">Thêm, sửa, xóa phụ kiện</div>
+            </button>
+
+            <button class="nav-button" onclick="location.href='danhmuc/index.php'">
+                <div class="icon"><i class="fas fa-list"></i></div>
+                <div class="button-title">Quản lý Danh mục</div>
+                <div class="button-desc">Quản lý danh mục sản phẩm</div>
+            </button>
+
+            <button class="nav-button" onclick="location.href='khachhang/index.php'">
+                <div class="icon"><i class="fas fa-users"></i></div>
+                <div class="button-title">Quản lý Khách hàng</div>
+                <div class="button-desc">Xem và quản lý thông tin khách hàng</div>
+            </button>
+
+            <button class="nav-button" onclick="location.href='donhang/index.php'">
+                <div class="icon"><i class="fas fa-shopping-cart"></i></div>
+                <div class="button-title">Quản lý Đơn hàng</div>
+                <div class="button-desc">Xem, xử lý đơn hàng</div>
+            </button>
+
+            <button class="nav-button" onclick="location.href='baocao/index.php'">
+                <div class="icon"><i class="fas fa-chart-line"></i></div>
+                <div class="button-title">Báo cáo</div>
+                <div class="button-desc">Thống kê doanh thu, tồn kho</div>
+            </button>
+        </div>
+    </div>
+</body>
+</html>
