@@ -25,7 +25,7 @@ document.getElementById('loginForm').addEventListener('submit', function(event) 
         if (data.success) {
             // Chuyển hướng đến trang quản lý nếu đăng nhập thành công
             if (data.role === 'admin') {
-                window.location.href = '../../source/pages/admin.html';
+                window.location.href = 'admin.html';
             }
         } else {
             alert(data.message);

@@ -3,13 +3,13 @@ const bcrypt = require('bcryptjs');
 
 const router = express.Router();
 
-// Cơ sở dữ liệu người dùng giả lập (cho mục đích demo)
+
 const users = [
   {
     id: 1,
     email: 'admin@example.com',
     username: 'adminuser',
-    passwordHash: bcrypt.hashSync('adminPass123', 10), // mật khẩu đã được băm
+    passwordHash: bcrypt.hashSync('adminPass123', 10), 
     role: 'admin'
   },
   {
@@ -40,6 +40,12 @@ router.post('/api/login', (req, res) => {
   if (!bcrypt.compareSync(password, user.passwordHash)) {
     return res.status(401).json({ success: false, message: 'Sai mật khẩu.' });
   }
+
+  if (email === 'admin@example.com' && password === 'adminPass123') {
+        res.json({ success: true, role: 'admin' });
+    } else {
+        res.json({ success: false, message: 'Sai tài khoản hoặc mật khẩu' });
+    }
 
   // Đăng nhập thành công
   return res.json({
