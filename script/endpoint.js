@@ -2,7 +2,7 @@ const express = require('express');
 const bcrypt = require('bcryptjs');
 
 const sqlite3 = require('sqlite3').verbose();
-const db = new sqlite3.Database('../data/shop.db');
+const db = new sqlite3.Database('./data/shop.db');
 
 const router = express.Router();
 
@@ -68,6 +68,52 @@ router.get('/api/products/:id', (req, res) => {
     if (err) return res.status(500).json({ error: err.message });
     if (!row) return res.status(404).json({ error: 'Không tìm thấy sản phẩm' });
     res.json(row);
+  });
+});
+
+
+// Thêm sản phẩm mới
+router.post('/api/products', (req, res) => {
+  const { id, name, price, brand, model } = req.body;
+
+  if (!name || !price) {
+    return res.status(400).json({ error: 'Tên và giá sản phẩm là bắt buộc.' });
+  }
+
+  const sql = 'INSERT INTO products (id, name, price, brand,model) VALUES (?, ?, ?, ?, ?)';
+  db.run(sql, [id, name, price, brand, model], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.status(201).json({ id: this.lastID, name, price, brand, model});
+  });
+});
+// xoa sản phẩm
+router.delete('/api/products/:id', (req, res) => {
+  db.run('DELETE FROM products WHERE id = ?', [req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json({ success: true });
+  });
+});
+// Cập nhật sản phẩm
+router.put('/api/products/:id', (req, res) => {
+  const { name, price, brand, model } = req.body;
+
+  if (!name || !price) {
+    return res.status(400).json({ error: 'Tên và giá sản phẩm là bắt buộc.' });
+  }
+
+  const sql = 'UPDATE products SET name = ?, price = ?, brand = ?, model = ? WHERE id = ?';
+  db.run(sql, [name, price, brand, model, req.params.id], function(err) {
+    if (err) return res.status(500).json({ error: err.message });
+    if (this.changes === 0) return res.status(404).json({ error: 'Không tìm thấy sản phẩm' });
+    res.json({ success: true });
+  });
+});
+
+// Lấy tất cả người dùng
+router.get('/api/users', (req, res) => {
+  db.all('SELECT * FROM users', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
   });
 });
 
