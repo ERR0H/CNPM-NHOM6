@@ -1,0 +1,30 @@
+[
+    {
+        "id_order" : "OD001",
+        "sdt" : "1234567890",
+        "order_date" : "2023-10-01",
+        "total" : 150000000.00,
+        "status" : "Completed"
+    },
+    {
+        "id_order" : "OD002",
+        "sdt" : "0987654321",
+        "order_date" : "2023-10-02",
+        "total" : 200000000.00,
+        "status" : "Pending"
+    },
+    {
+        "id_order" : "OD003",
+        "sdt" : "1234567890",
+        "order_date" : "2023-10-03",
+        "total" : 300000000.00,
+        "status" : "Cancelled"
+    },
+    {
+        "id_order" : "OD004",
+        "sdt" : "0987654321",
+        "order_date" : "2023-10-04",
+        "total" : 250000000.00,
+        "status" : "Completed"
+    }
+]

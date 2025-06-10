@@ -1,0 +1,38 @@
+[
+    {
+        "id": "DT001",
+        "id_order": "OD001",
+        "quantity": 2,
+        "price": 12000000
+    },
+    {
+        "id": "DT002",
+        "id_order": "OD001",
+        "quantity": 1,
+        "price": 8000000
+    },
+    {
+        "id": "DT003",
+        "id_order": "OD002",
+        "quantity": 1,
+        "price": 25000000
+    },
+    {
+        "id": "DT004",
+        "id_order": "OD002",
+        "quantity": 3,
+        "price": 7000000
+    },
+    {
+        "id": "DT001",
+        "id_order": "OD003",
+        "quantity": 1,
+        "price": 12000000
+    },
+    {
+        "id": "DT002",
+        "id_order": "OD004",
+        "quantity": 2,
+        "price": 8000000
+    }
+]
