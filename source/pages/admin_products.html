@@ -8,6 +8,19 @@
 <body>
   <div class="container mt-4">
     <h2>Quản lý Sản phẩm</h2>
+    <!-- Form thêm/sửa sản phẩm -->
+    <form id="product-form" class="mb-4">
+      <input type="hidden" id="product-id">
+      <div class="row g-2">
+        <div class="col"><input type="text" id="id" class="form-control" placeholder="ID sản phẩm" required></div>
+        <div class="col"><input type="text" id="name" class="form-control" placeholder="Tên sản phẩm" required></div>
+        <div class="col"><input type="text" id="price" class="form-control" placeholder="Giá" required></div>
+        <div class="col"><input type="text" id="img" class="form-control" placeholder="Đường dẫn ảnh" required></div>
+        <div class="col"><input type="text" id="brand" class="form-control" placeholder="Hãng" required></div>
+        <div class="col"><input type="text" id="model" class="form-control" placeholder="Model" required></div>
+        <div class="col"><button type="submit" class="btn btn-success" id="submit-btn">Thêm mới</button></div>
+      </div>
+    </form>
     <table class="table table-bordered" id="products-table">
       <thead>
         <tr>
@@ -18,34 +31,100 @@
     </table>
   </div>
   <script>
-    fetch('/api/products')
-      .then(res => res.json())
-      .then(products => {
-        const tbody = document.querySelector('#products-table tbody');
-        tbody.innerHTML = '';
-        products.forEach(p => {
-          tbody.innerHTML += `
-            <tr>
-              <td>${p.id}</td>
-              <td>${p.name}</td>
-              <td>${p.price}</td>
-              <td><img src="${p.img}" width="60"></td>
-              <td>${p.brand}</td>
-              <td>${p.model}</td>
-              <td>
-                <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">Xóa</button>
-              </td>
-            </tr>
-          `;
+    let editingId = null;
+
+    function loadProducts() {
+      fetch('/api/products')
+        .then(res => res.json())
+        .then(products => {
+          const tbody = document.querySelector('#products-table tbody');
+          tbody.innerHTML = '';
+          products.forEach(p => {
+            tbody.innerHTML += `
+              <tr>
+                <td>${p.id}</td>
+                <td>${p.name}</td>
+                <td>${p.price}</td>
+                <td><img src="${p.img}" width="60"></td>
+                <td>${p.brand || ''}</td>
+                <td>${p.model || ''}</td>
+                <td>
+                  <button class="btn btn-warning btn-sm" onclick="editProduct('${p.id}')">Sửa</button>
+                  <button class="btn btn-danger btn-sm" onclick="deleteProduct('${p.id}')">Xóa</button>
+                </td>
+              </tr>
+            `;
+          });
         });
-      });
+    }
+
+    loadProducts();
+
+    // Thêm hoặc cập nhật sản phẩm
+    document.getElementById('product-form').onsubmit = function(e) {
+      e.preventDefault();
+      const id = document.getElementById('product-id').value;
+      const data = {
+        id: document.getElementById('id').value,
+        name: document.getElementById('name').value,
+        price: document.getElementById('price').value,
+        img: document.getElementById('img').value,
+        brand: document.getElementById('brand').value,
+        model: document.getElementById('model').value
+      };
+      if (id) {
+        // Sửa sản phẩm
+        fetch('/api/products/' + id, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(() => {
+          resetForm();
+          loadProducts();
+        });
+      } else {
+        // Thêm sản phẩm
+        fetch('/api/products', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(data)
+        })
+        .then(res => res.json())
+        .then(() => {
+          resetForm();
+          loadProducts();
+        });
+      }
+    };
+
+    function editProduct(id) {
+      fetch('/api/products/' + id)
+        .then(res => res.json())
+        .then(p => {
+          document.getElementById('product-id').value = p.id;
+          document.getElementById('name').value = p.name;
+          document.getElementById('price').value = p.price;
+          document.getElementById('img').value = p.img;
+          document.getElementById('brand').value = p.brand || '';
+          document.getElementById('model').value = p.model || '';
+          document.getElementById('submit-btn').textContent = 'Cập nhật';
+        });
+    }
 
     function deleteProduct(id) {
       if (confirm('Xóa sản phẩm này?')) {
         fetch('/api/products/' + id, { method: 'DELETE' })
           .then(res => res.json())
-          .then(() => location.reload());
+          .then(() => loadProducts());
       }
+    }
+
+    function resetForm() {
+      document.getElementById('product-form').reset();
+      document.getElementById('product-id').value = '';
+      document.getElementById('submit-btn').textContent = 'Thêm mới';
     }
   </script>
 </body>
