@@ -1,0 +1,14 @@
+[
+    {
+        "sdt": "1234567890",
+        "name": "John Doe",
+        "email": "john@example.com",
+        "address": "123 Main St, City, Country"
+    },
+    {
+        "sdt": "0987654321",
+        "name": "Jane Smith",
+        "email": "jame@example.com",
+        "address": "456 Elm St, City, Country"
+    }
+]
