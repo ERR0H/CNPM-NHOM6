@@ -1,0 +1,30 @@
+[
+    {
+        "id": "DT001",
+        "name": "Điện thoại Samsung",
+        "price": 12000000,
+        "brand": "Samsung",
+        "model": "Galaxy S21"
+    },
+    {
+        "id": "DT002",
+        "name": "Điện thoại Xiaomi",
+        "price": 8000000,
+        "brand": "Xiaomi",
+        "model": "Redmi Note 10"
+    },
+    {
+        "id": "DT003",
+        "name": "Điện thoại Apple",
+        "price": 25000000,
+        "brand": "Apple",
+        "model": "iPhone 13"
+    },
+    {
+        "id": "DT004",
+        "name": "Điện thoại Oppo",
+        "price": 7000000,
+        "brand": "Oppo",
+        "model": "A54"
+    }
+]
