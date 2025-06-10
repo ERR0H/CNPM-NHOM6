@@ -71,7 +71,6 @@ router.get('/api/products/:id', (req, res) => {
   });
 });
 
-
 // Thêm sản phẩm mới
 router.post('/api/products', (req, res) => {
   const { id, name, price, brand, model } = req.body;
@@ -115,6 +114,29 @@ router.get('/api/users', (req, res) => {
     if (err) return res.status(500).json({ error: err.message });
     res.json(rows);
   });
+});
+
+// lay don hang
+router.get('/api/orders', (req, res) => {
+  db.all('SELECT * FROM orders', [], (err, rows) => {
+    if (err) return res.status(500).json({ error: err.message });
+    res.json(rows);
+  });
+});
+
+// lay chi tiet don hang
+router.get('/api/orders/:id/details', (req, res) => {
+  db.all(
+    `SELECT od.id, p.name, od.quantity, od.price
+     FROM order_details od
+     JOIN products p ON od.id = p.id
+     WHERE od.id_order = ?`,
+    [req.params.id],
+    (err, rows) => {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json(rows);
+    }
+  );
 });
 
 module.exports = router;
