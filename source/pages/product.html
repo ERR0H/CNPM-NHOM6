@@ -232,7 +232,7 @@
 
                     <p class="card-text">Giá: ${product.price}</p>
 
-                    <a href="#" class="btn btn-primary">Thêm vào giỏ hàng</a>
+                    <button class="btn btn-primary mt-2" onclick="addToCart('${product.id}')">Thêm vào giỏ hàng</button>
 
                     <a href="./detail.html?id=${product.id}" class="btn btn-secondary">Xem chi tiết</a>
 
@@ -245,6 +245,21 @@
             });
         });
 
+    </script>
+    <script>
+    function addToCart(productId) {
+    // Lấy giỏ hàng hiện tại từ localStorage (nếu có)
+    let cart = JSON.parse(localStorage.getItem('cart')) || [];
+    // Kiểm tra sản phẩm đã có trong giỏ chưa
+    const index = cart.findIndex(item => item.id === productId);
+    if (index > -1) {
+        cart[index].quantity += 1;
+    } else {
+        cart.push({ id: productId, quantity: 1 });
+    }
+    localStorage.setItem('cart', JSON.stringify(cart));
+    alert('Đã thêm vào giỏ hàng!');
+    }
     </script>
 </body>
 </html>

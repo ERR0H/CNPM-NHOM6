@@ -5,17 +5,28 @@
   <title>Quản lý Khách hàng</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
 </head>
-<body>
-  <div class="container mt-4">
-    <h2>Quản lý Khách hàng</h2>
-    <table class="table table-bordered" id="customers-table">
-      <thead>
-        <tr>
-          <th>ID</th><th>Email</th><th>Tên</th><th>Địa chỉ</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
+<body class="bg-light">
+  <div class="container py-4">
+    <div class="card shadow mb-4">
+      <div class="card-header bg-primary text-white">
+        <h3 class="mb-0">Quản lý Khách hàng</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table class="table table-hover align-middle table-bordered rounded" id="customers-table">
+            <thead class="table-primary">
+              <tr>
+                <th>SĐT</th>
+                <th>Email</th>
+                <th>Tên</th>
+                <th>Địa chỉ</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
   </div>
   <script>
     fetch('/api/users')
